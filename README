@@ -1,8 +1,11 @@
 Benchmark workload for Linux Agent
+==================================
 
-* Common
+## Common
+```sg
 sh run.sh
+```
 
-* List
-UnixBench
-test_listen
+## List
+- UnixBench
+- test_listen
