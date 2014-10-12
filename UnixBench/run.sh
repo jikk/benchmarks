@@ -4,7 +4,7 @@ echo "=======" >> $OUTPUT
 date		>> $OUTPUT 
 echo "=======" >> $OUTPUT
 # Regular
-(time ./Run) >>  $OUTPUT
+time /home/ubuntu/benchmarks/UnixBench/Run >>  $OUTPUT
 
 # Short
 #./Run -i 1 | tee $OUTPUT
