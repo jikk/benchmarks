@@ -1,8 +1,10 @@
 #!/bin/sh
-OUTPUT='test_unixbench.txt'
-
+OUTPUT='/home/ubuntu/benchmarks/UnixBench/test_unixbench.txt'
+echo "=======" >> $OUTPUT
+date		>> $OUTPUT 
+echo "=======" >> $OUTPUT
 # Regular
-./Run | tee $OUTPUT
+(time ./Run) >>  $OUTPUT
 
 # Short
 #./Run -i 1 | tee $OUTPUT
