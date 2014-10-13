@@ -4,3 +4,6 @@
 [submodule "kernel"]
 	path = kernel
 	url = git@github.com:jikk/kernel.git
+[submodule "linux"]
+	path = linux
+	url = https://github.com/torvalds/linux.git
