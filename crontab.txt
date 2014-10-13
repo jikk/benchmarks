@@ -1,0 +1,4 @@
+# Unix bench runs every hour.
+0 * * * *  /home/ubuntu/benchmarks/UnixBench/run.sh
+# Daily nmon logging enabled.
+0 12 * * * /usr/bin/nmon  -f -l -t -s 60 -c 1440 -m ~/nmon
