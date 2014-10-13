@@ -1,6 +1,8 @@
 [submodule "AWS"]
 	path = AWS
-	url = git@github.com:jikk/AWS.git
+	#url = git@github.com:jikk/AWS.git
+	url = https://github.com/jikk/AWS.git
 [submodule "kernel"]
 	path = kernel
-	url = git@github.com:jikk/kernel.git
+	#url = git@github.com:jikk/kernel.git
+	url = https://github.com/jikk/kernel.git
