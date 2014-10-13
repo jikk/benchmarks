@@ -1,2 +1,0 @@
-# run UnixBench every 2 hours.
-0 */2 * * *  /home/ubuntu/benchmarks/UnixBench/run.sh
