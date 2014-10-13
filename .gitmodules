@@ -1,3 +1,6 @@
-[submodule "aws_script"]
-	path = aws_script
-	url = git@am14-07.nec-labs.com:kjee/aws_script.git
+[submodule "AWS"]
+	path = AWS
+	url = git@github.com:jikk/AWS.git
+[submodule "kernel"]
+	path = kernel
+	url = git@github.com:jikk/kernel.git
