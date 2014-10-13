@@ -4,6 +4,7 @@ echo "=======" >> $OUTPUT
 date		>> $OUTPUT 
 echo "=======" >> $OUTPUT
 UBENCH_HOME=${HOME}/benchmarks/UnixBench/
+cd ${UBENCH_HOME}
 # Regular
 (time ${UBENCH_HOME}/Run) >>  $OUTPUT 2>&1
 
