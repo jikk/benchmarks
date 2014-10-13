@@ -1,0 +1,3 @@
+[submodule "aws_script"]
+	path = aws_script
+	url = git@am14-07.nec-labs.com:kjee/aws_script.git
