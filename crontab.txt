@@ -1,4 +1,6 @@
-# Unix bench runs every hour.
-0 * * * *  /home/ubuntu/benchmarks/UnixBench/run.sh
+# Unix bench runs every two hours.
+0 */2 * * *  /home/ubuntu/benchmarks/ubench_run.sh
+# Kernel build runs every two hours.
+0 */3 * * *  /home/ubuntu/benchmarks/kernel_build.sh
 # Daily nmon logging enabled.
 0 12 * * * /usr/bin/nmon  -f -l -t -s 60 -c 1440 -m ~/nmon
