@@ -9,7 +9,7 @@ date						>> $OUTPUT
 echo "=====================================" 	>> $OUTPUT
 
 cd $LINUX_HOME
-time tar cvzf * ${TMP}/linux.tgz >> $OUTPUT 2>> $OUTPUT
+time tar cvzf  ${TMP}/linux.tgz * >> $OUTPUT 2>> $OUTPUT
 
 echo "==== BEGIN: tar/gzip de-compression ===="	>> $OUTPUT
 date						>> $OUTPUT
