@@ -7,8 +7,10 @@ date					>> $OUTPUT
 echo "=============================" 	>> $OUTPUT
 
 cd $KBUILD_HOME
+# Clean up
+time make clean >> $OUTPUT 2>> $OUTPUT
 # Build.
-time make >> $OUTPUT 2>&1
+time make >> $OUTPUT 2>> $OUTPUT
 
 echo "==== END: Kernel build ====" 	>> $OUTPUT
 date					>> $OUTPUT
