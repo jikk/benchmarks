@@ -12,6 +12,9 @@ time make clean >> $OUTPUT 2>> $OUTPUT
 # Build.
 time make >> $OUTPUT 2>> $OUTPUT
 
+# Clean up again.
+time make clean >> $OUTPUT 2>> $OUTPUT
+
 echo "==== END: Kernel build ====" 	>> $OUTPUT
 date					>> $OUTPUT
 echo "===========================" 	>> $OUTPUT
