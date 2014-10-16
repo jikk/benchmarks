@@ -9,13 +9,13 @@ date						>> $OUTPUT
 echo "=====================================" 	>> $OUTPUT
 
 cd $LINUX_HOME
-time tar cvzf  ${TMP}/linux.tgz * >> $OUTPUT 2>> $OUTPUT
+time tar czf  ${TMP}/linux.tgz * >> $OUTPUT 2>> $OUTPUT
 
 echo "==== BEGIN: tar/gzip de-compression ===="	>> $OUTPUT
 date						>> $OUTPUT
 echo "========================================"	>> $OUTPUT
 cd $TMP
-time tar xvzf linux.tgz  >> $OUTPUT 2>> $OUTPUT
+time tar xzf linux.tgz  >> $OUTPUT 2>> $OUTPUT
 # Clean up
 rm -f *.tgz
 
