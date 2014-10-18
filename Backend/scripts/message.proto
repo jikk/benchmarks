@@ -1,0 +1,200 @@
+//option java_package = "com.neclabs.asi.server.message";
+option java_package = "com.neclabs.asi.rawdb.protobuf";
+message PBEventArray {
+	repeated PBEvent event = 1;
+	optional int32 seq = 2;
+}
+
+message PBEvent {
+	optional uint64 timestamp = 1;
+	optional PBProcessEvent processEvent = 2;
+	optional PBHostInfoUpdateEvent hostInfoUpdateEvent = 3;
+	optional PBUserInfoUpdateEvent userInfoUpdateEvent = 4;
+	optional PBFSInfoUpdateEvent fsInfoUpdateEvent = 5;
+	optional uint64 serial = 6;
+	optional bool isRecovered = 7;
+}
+
+message PBProcessEvent {
+	optional PBASIProcess source = 2;
+	optional PBNetworkEvent network = 3;
+	optional PBProcessStartEvent proc_start = 4;
+	optional PBProcessEndEvent proc_end = 5;
+	optional PBIPCEvent ipc = 6;
+	optional PBProcessExecveEvent proc_exe = 7;
+	optional PBFileOpenEvent file_open = 8;
+	optional PBFileDupEvent file_dup = 9;
+	optional PBFileCloseEvent file_close = 10;
+	optional PBSocketEvent socket = 11;
+	optional int32 exit = 12;
+    optional PBFileEvent files = 13; 
+	optional PBFilefcntlEvent file_fcntl = 14;
+	optional PBBindEvent bind = 15;
+	optional PBProcessCPUEvent cpu = 16;
+	optional PBListenEvent listen = 17;
+
+    message PBFileEvent {
+        repeated PBFile files = 1; 
+        optional string cwd = 2; 
+        optional string syscall = 3; 
+    }
+
+	message PBProcessStartEvent {
+		optional PBASIProcess dest = 1;
+	    optional bool isThread = 2; 
+	}
+
+	message PBProcessEndEvent {
+		optional int32 type = 1;
+		optional bool isExitGroup = 2;
+	}
+
+	message PBProcessExecveEvent {
+		optional PBProgram program = 1;
+		repeated string cmd_tokens = 2;
+	}
+
+	message PBNetworkEvent {
+		optional int32 type = 1;
+		optional string sourceIP = 2;
+		optional string destIP = 3;
+		optional uint32 sourcePort = 4;
+		optional uint32 destPort = 5;
+		optional bool isIncoming = 6;
+		optional int32 sockfd = 7;
+		optional int32 basefd = 8;
+		optional int32 acceptFlag = 9;
+
+	}
+
+	message PBIPCEvent {
+		optional IPCType type = 1;
+		optional string sourcePath = 2;
+		optional string destPath = 3;
+		optional int32 fd0 = 4;
+		optional int32 fd1 = 5;
+		optional int32 shmKey = 6;
+		optional int32 msqKey = 7;
+		optional bool isIncoming = 8;
+		optional int32 acceptFlag = 9;
+
+		enum IPCType {
+			SOCK = 0;
+			SOCK_PAIR = 1;
+			PIPE = 2;
+			SHM = 3;
+			MSQ = 4;
+		}
+	}
+
+	message PBFileOpenEvent {
+		optional int32 fd = 1;
+		optional string path = 2;
+		optional int32 flags = 3;
+		optional int32 openMode = 4; // in open() parameters
+		optional int32 basefd = 5; // in openat() parameter
+	}
+
+	message PBFileDupEvent {
+		optional int32 oldfd = 1;
+		optional int32 newfd = 2;
+		optional int32 flags = 3;
+	}
+
+	message PBFilefcntlEvent {
+		optional int32 fd = 1;
+		optional int32 cmd = 2;
+		optional int32 arg = 3;
+	}
+
+	message PBFileCloseEvent {
+		optional int32 fd = 1;
+	}
+
+	message PBSocketEvent {
+		optional int32 sockfd = 1;
+	}
+
+	message PBBindEvent {
+		optional int32 sockfd = 1;
+		optional string localIP = 2;
+		optional int32 localPort = 3;
+		optional string localPath = 4;
+	}
+
+    message PBListenEvent{
+		optional int32 sockfd = 1;
+    }
+
+	message PBProcessCPUEvent {
+		optional double utime = 1;
+		optional double stime = 2;
+		optional double cutime = 3;
+		optional double cstime = 4;
+	}
+}
+
+message PBHostInfoUpdateEvent {
+	optional string distributionVersion = 1; // e.g., "windows 7", "ubuntu 11.10"
+	optional string kernelVersion = 2; // e.g., "SP2", "Linux 2.6.11"
+	repeated string localIPs = 3;
+	optional string domainName = 4;
+	optional bool isStartup = 5; // to remind the backend that the agent has just started (if isStartup == true)
+}
+
+message PBUserInfoUpdateEvent {
+	repeated string user = 1;
+}
+
+message PBFSInfoUpdateEvent {
+	repeated PBFileInfo fileInfos = 1;
+	message PBFileInfo {
+		optional string filePath = 1;
+		optional string permission = 2;
+		optional string fingerprint = 3;
+	}
+
+}
+
+message PBASIProcess {
+	optional PBProgram program = 1;
+	optional uint64 startTime = 2;
+	optional bool fuzzyLaunch = 3;
+	optional int32 pid = 4;
+	optional int32 uid = 5;
+	optional int32 euid = 6;
+	optional int32 gid = 7;
+	optional int32 egid = 8;
+	optional int32 ppid = 9; 
+	optional int32 tgid = 10; 
+	optional uint64 leaderStartTime = 11;
+}
+
+message PBProgram {
+	optional string path = 1;
+	repeated Hash hash = 2;
+
+	enum HashType {
+		FILE_HDR = 0;
+		PROG_HDR = 1;
+		LOAD_SEG = 2;
+		DYNAMIC_SEG = 3;
+		INTERP_SEG = 4;
+		BUILD_ID = 5;
+	}
+
+	message Hash {
+		optional HashType type = 1;
+		optional bytes value = 2;
+	}
+}
+
+message PBFile {
+	optional int64 inode = 1; 
+	optional int64 igen = 7; 
+	optional string dev = 2; 
+	optional int32 mode = 3; 
+	optional int32 ouid = 4; 
+	optional int32 ogid = 5;
+    optional string path = 6; 
+}
